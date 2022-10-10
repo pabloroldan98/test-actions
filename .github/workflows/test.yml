@@ -1,0 +1,21 @@
+
+name: Test
+
+# Bump version only when Push
+on: push
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'SKIP')"
+
+    steps:
+
+    - name: echos
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+      run: |
+        echo ${COMMIT_MSG}
+        echo "hooooola"
+        echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
