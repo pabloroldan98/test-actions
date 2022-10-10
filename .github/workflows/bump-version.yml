@@ -41,11 +41,7 @@ jobs:
         GH_USER: ${{ github.actor }}
         GH_TOKEN: ${{ github.token }}
         PR_TARGET_BRANCH: ${{ github.base_ref }}
-        PR_SOURCE_BRANCH: ${{ github.head_ref }}
-        PR_COMMIT_HEAD: ${{ github.event.head_commit.message }}
       run: |
-        echo "$PR_SOURCE_BRANCH"
-        echo "$PR_COMMIT_HEAD"
         git config user.name "${GH_USER}"
         git config user.email "${GH_USER}@users.noreply.github.com"
         git remote set-url origin https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY
