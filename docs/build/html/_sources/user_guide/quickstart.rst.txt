@@ -1,0 +1,64 @@
+Quickstart
+============================================
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+Getting started
+---------------
+
+Using the :class:`Client <devo_ml.modelmanager.client>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here we will start using the client with a token:
+
+.. code-block:: python
+
+   >>> from devo_ml.modelmanager import create_client_from_token
+
+
+   >>> client = create_client_from_token("https://url_mlmodelmanager", "my_token")
+   >>> model = client.get_model("my_model")
+   >>> model
+   {
+      'id': 1,
+      'name': 'my_model',
+      'engine': 'H2O',
+      'description': 'This is the model description of my_model',
+      ...
+   }
+
+
+That is the easiest way to create a :class:`Client <devo_ml.modelmanager.client>`.
+
+Additionally, you can use the client with a profile: :ref:`Create Client from profile <client-profile>`
+
+
+Not using the :class:`Client <devo_ml.modelmanager.client>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All the client methods are also accessible without creating a :class:`client <devo_ml.modelmanager.client>` (via :class:`func_facade <devo_ml.modelmanager.func_facade>`):
+
+.. code-block:: python
+
+   >>> from devo_ml.modelmanager import get_model
+
+
+   >>> model = get_model("https://url_mlmodelmanager", "my_token", "my_model")
+   >>> model
+   {
+      'id': 1,
+      'name': 'my_model',
+      'engine': 'H2O',
+      'description': 'This is the model description of my_model',
+      ...
+   }
+
+
+
+
+
+
