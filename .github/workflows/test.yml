@@ -21,6 +21,9 @@ jobs:
         virtualenvs-create: true
         virtualenvs-in-project: true
         installer-parallel: true
+      run: |
+        NEW_VERSION=$(poetry version -s)
+        echo "NEW_VERSION"
     - uses: actions/setup-python@v4
       with:
         python-version: 3.8
@@ -37,8 +40,3 @@ jobs:
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
         echo ${REF_NAME}
         echo ${MY_ECHO}
-        ls
-        cd ..
-        ls
-        NEW_VERSION=$(poetry version -s)
-        echo "NEW_VERSION"
