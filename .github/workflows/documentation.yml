@@ -14,16 +14,15 @@ jobs:
           pip install sphinx sphinx_rtd_dark_mode
       - name: Sphinx build
         run: |
-          sphinx-build docs/source _build
+          sphinx-build docs/source _buildn
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/
-          destination_dir: 3.0.0
-          force_orphan: true
-
+          # deploy the current public folder
+          # to <base url>/x.y.z version subfolder
+          publish_dir: ./public
+          destination_dir: 4.0.0
       - name: Deploy redirect 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
