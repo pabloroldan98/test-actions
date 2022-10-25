@@ -40,5 +40,7 @@ jobs:
         ls -a
         cd ..
         ls -a
+        cd ..
+        ls -a
         NEW_VERSION=$(poetry version -s)
         echo "NEW_VERSION"
