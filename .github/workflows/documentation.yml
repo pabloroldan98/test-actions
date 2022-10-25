@@ -2,7 +2,7 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: push
+on: release
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
-          poetry install
+          pip install sphinx sphinx_rtd_dark_mode
       - name: Sphinx build
         run: |
           sphinx-build docs/source _build
@@ -39,4 +39,4 @@ jobs:
           # deploy the current public folder
           # to <base url>/x.y.z version subfolder
           publish_dir: ./_build
-          destination_dir: 5.0.0
+          destination_dir: ${{ env.RELEASE_VERSION }}
