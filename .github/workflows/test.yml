@@ -37,8 +37,8 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: echo env
         env:
-          skip_env: env.SKIPBUMP
-          release_env: env.RELEASE_VERSION
+          skip_env: ${{ env.SKIPBUMP }}
+          release_env: ${{ env.RELEASE_VERSION }}
         run: |
           echo ${skip_env}
           echo ${release_env}
