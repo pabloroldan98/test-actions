@@ -2,7 +2,7 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: pull request
+on: release
 jobs:
   docs:
     runs-on: ubuntu-latest
