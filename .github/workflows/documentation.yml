@@ -20,5 +20,5 @@ jobs:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _build/
-          destination_dir: 1.0.0
+          destination_dir: 2.0.0
           force_orphan: true
