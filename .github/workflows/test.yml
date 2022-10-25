@@ -37,8 +37,8 @@ jobs:
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
         echo ${REF_NAME}
         echo ${MY_ECHO}
-        ls
+        ls -a
         cd ..
-        ls
+        ls -a
         NEW_VERSION=$(poetry version -s)
         echo "NEW_VERSION"
