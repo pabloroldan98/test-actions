@@ -16,8 +16,10 @@ jobs:
       env:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         REF_NAME: ${{ github.ref_name }}
+        MY_ECHO: S(echo "heyeyeyey")
       run: |
         echo ${COMMIT_MSG}
         echo "hooooola"
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
         echo ${REF_NAME}
+        echo ${MY_ECHO}

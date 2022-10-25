@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_dark_mode
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Sphinx build
         run: |
           sphinx-build docs/source _build

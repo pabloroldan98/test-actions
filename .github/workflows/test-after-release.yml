@@ -2,7 +2,11 @@
 name: Test PR
 
 # Bump version only when Pull Requests
-on: pull_request
+on:
+  workflow_run:
+    workflows: ["Publish Python Package to Pypi"]
+    types:
+      - completed
 
 jobs:
   test-pr:
@@ -17,6 +21,7 @@ jobs:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         HEAD_REF: ${{ github.event.pull_request.head.ref }}
         HEAD_REF_2: ${{ github.head_ref }}
+        REF_NAME: ${{ github.ref_name }}
       run: |
         echo ${COMMIT_MSG}
         echo ${HEAD_REF}
@@ -26,3 +31,4 @@ jobs:
         echo ${GITHUB_REF}
         echo "hooooola"
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
+        echo ${REF_NAME}
