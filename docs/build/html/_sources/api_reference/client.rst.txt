@@ -1,0 +1,9 @@
+:mod:`devo_ml.modelmanager.devo_ml.modelmanager.client`
+=========================================================
+
+
+.. automodule:: devo_ml.modelmanager.client
+    :special-members:
+    :members:
+    :exclude-members: __weakref__
+

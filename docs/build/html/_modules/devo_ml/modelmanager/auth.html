@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>devo_ml.modelmanager.auth &mdash; ML Model Manager  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../../../_static/dark_mode_js/theme_switcher.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #bfc607" >
+            <a href="../../../index.html" class="icon icon-home"> ML Model Manager
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_reference/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #bfc607" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ML Model Manager</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>devo_ml.modelmanager.auth</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for devo_ml.modelmanager.auth</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">PreparedRequest</span>
+
+
+<span class="c1">#: Signature type for callable authentications.</span>
+<span class="n">AuthCallable</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PreparedRequest</span><span class="p">],</span> <span class="n">PreparedRequest</span><span class="p">]</span>
+
+<span class="c1">#: Constant denoting authentication type Bearer.</span>
+<span class="n">BEARER</span> <span class="o">=</span> <span class="s2">&quot;bearer&quot;</span>
+
+<span class="c1">#: Constant denoting authentication type StandAlone.</span>
+<span class="n">STANDALONE</span> <span class="o">=</span> <span class="s2">&quot;standalone&quot;</span>
+
+
+<div class="viewcode-block" id="get_default_auth_type"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.get_default_auth_type">[docs]</a><span class="k">def</span> <span class="nf">get_default_auth_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns the default authentication type used.</span>
+
+<span class="sd">    :return: The default authentication</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">STANDALONE</span></div>
+
+
+<div class="viewcode-block" id="validate_auth_type"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.validate_auth_type">[docs]</a><span class="k">def</span> <span class="nf">validate_auth_type</span><span class="p">(</span><span class="n">auth_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Checks whether a value is a valid authentication type.</span>
+
+<span class="sd">    :param auth_type: The value to validate</span>
+<span class="sd">    :type auth_type: str</span>
+<span class="sd">    :return: ``True`` if the value is a valid authentication type otherwise</span>
+<span class="sd">        ``False``</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">auth_type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">BEARER</span><span class="p">,</span> <span class="n">STANDALONE</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_auth_from_token"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.create_auth_from_token">[docs]</a><span class="k">def</span> <span class="nf">create_auth_from_token</span><span class="p">(</span>
+    <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">auth_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">STANDALONE</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthCallable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates an authentication object based on a token ready to use</span>
+<span class="sd">    by the client.</span>
+
+<span class="sd">    :param token: The token to authenticate</span>
+<span class="sd">    :type token: str</span>
+<span class="sd">    :param auth_type: The type of the authentication,</span>
+<span class="sd">        defaults to :class:`STANDALONE`</span>
+<span class="sd">    :type auth_type: str</span>
+<span class="sd">    :raises ValueError: if ``auth_type`` is not valid</span>
+<span class="sd">    :return: An authentication object</span>
+<span class="sd">    :rtype: AuthCallable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">validate_auth_type</span><span class="p">(</span><span class="n">auth_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid auth type: &#39;</span><span class="si">{</span><span class="n">auth_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">BEARER</span><span class="p">:</span> <span class="n">HttpDevoBearerTokenAuth</span><span class="p">,</span>
+        <span class="n">STANDALONE</span><span class="p">:</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">,</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">auth_type</span><span class="p">,</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">)(</span><span class="n">token</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HttpDevoTokenAuth"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoTokenAuth">[docs]</a><span class="k">class</span> <span class="nc">HttpDevoTokenAuth</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An HTTP authentication scheme based on a token supported by</span>
+<span class="sd">    ML Model Manager.</span>
+
+<span class="sd">    The implementations of this class are objects ready to use by the client to</span>
+<span class="sd">    authenticate and also by ``requests`` library.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HttpDevoTokenAuth.__init__"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoTokenAuth.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates an authentication base on a token.</span>
+
+<span class="sd">        :param token: The token used</span>
+<span class="sd">        :type token: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span></div>
+
+<div class="viewcode-block" id="HttpDevoTokenAuth.__call__"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoTokenAuth.__call__">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">PreparedRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PreparedRequest</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Subclasses must implement this method to client be able to</span>
+<span class="sd">        call it as a function when authenticate a request.</span>
+
+<span class="sd">        :param req: The request object to authenticate</span>
+<span class="sd">        :type req: requests.PreparedRequest</span>
+<span class="sd">        :return: The request object authenticated</span>
+<span class="sd">        :rtype: requests.PreparedRequest</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Auth must be callable.&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="HttpDevoStandAloneTokenAuth"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoStandAloneTokenAuth">[docs]</a><span class="k">class</span> <span class="nc">HttpDevoStandAloneTokenAuth</span><span class="p">(</span><span class="n">HttpDevoTokenAuth</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An :class:`HttpDevoTokenAuth` that authenticates a request with HTTP</span>
+<span class="sd">    Devo Standalone authentication scheme.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HttpDevoStandAloneTokenAuth.__call__"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoStandAloneTokenAuth.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">PreparedRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PreparedRequest</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Adds the header ``standAloneToken: &lt;token&gt;`` to the request.</span>
+
+<span class="sd">        :param req: The request object to authenticate</span>
+<span class="sd">        :type req: requests.PreparedRequest</span>
+<span class="sd">        :return: The request object authenticated with proper header</span>
+<span class="sd">        :rtype: requests.PreparedRequest</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;standAloneToken&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span>
+        <span class="k">return</span> <span class="n">req</span></div></div>
+
+
+<div class="viewcode-block" id="HttpDevoBearerTokenAuth"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoBearerTokenAuth">[docs]</a><span class="k">class</span> <span class="nc">HttpDevoBearerTokenAuth</span><span class="p">(</span><span class="n">HttpDevoTokenAuth</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An :class:`HttpDevoTokenAuth` that authenticates a request with HTTP Bearer</span>
+<span class="sd">    authentication scheme.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HttpDevoBearerTokenAuth.__call__"><a class="viewcode-back" href="../../../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoBearerTokenAuth.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">PreparedRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PreparedRequest</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Adds the header ``Authorization: Bearer &lt;token&gt;`` to the request.</span>
+
+<span class="sd">        :param req: The request object to authenticate</span>
+<span class="sd">        :type req: requests.PreparedRequest</span>
+<span class="sd">        :return: The request object authenticated with proper header</span>
+<span class="sd">        :rtype: requests.PreparedRequest</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">req</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Devo ML Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

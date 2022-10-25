@@ -1,0 +1,46 @@
+.. _client-profile:
+
+Create :class:`Client <devo_ml.modelmanager.client>` from profile
+=========================================================
+
+
+#. First we need to create a profile:
+
+   #. (OPTIONAL) Create a directory where you want to store your profiles, in this case we will call it ``./my_profiles``
+
+   #. Create a file, in this case we will call it ``profiles.ini`` (./my_profiles/profiles.ini)
+
+   #. Inside the file we add the following parameters to create a profile named ``my_profile``:
+
+       .. code-block:: bash
+
+         [my_profile]
+         url = https://url_mlmodelmanager
+         token = my_tokehn
+         auth_type = standalone
+         download_path = /home/user/models
+
+       .. note::
+
+         ``auth_type`` and ``download_path`` are not required
+
+#. Connect to the client using a token
+
+   .. code-block:: python
+
+      >>> from devo_ml.modelmanager import create_client_from_profile
+
+
+      >>> client = create_client_from_profile("my_profile", "./my_profiles/profiles.ini")
+      >>> model = client.get_model("my_model")
+      >>> model
+      {
+         'id': 1,
+         'name': 'my_model',
+         'engine': 'H2O',
+         'description': 'This is the model description of my_model',
+         ...
+      }
+
+
+
