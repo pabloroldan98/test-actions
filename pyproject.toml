@@ -4,7 +4,6 @@ version = "0.2.2"
 description = ""
 authors = ["Pablo Roldan <pablo.roldan@devo.com>"]
 readme = "README.md"
-packages = [{include = "test_actions"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
