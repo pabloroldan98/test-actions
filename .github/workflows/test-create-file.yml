@@ -1,0 +1,53 @@
+
+name: Test
+
+# Bump version only when Push
+on: push
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'SKIP')"
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: snok/install-poetry@v1
+        with:
+          virtualenvs-in-project: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+          cache: 'poetry'
+
+
+      - name: echos release version
+        run: |
+          POETRY_VERSION=$(poetry version -s)
+          echo "S{POETRY_VERSION}"
+          echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
+          
+
+      - name: Create file
+        env:
+          skip_env: ${{ env.SKIPBUMP }}
+          release_env: ${{ env.RELEASE_VERSION }}
+        run: |
+          echo ${skip_env}
+          echo ${release_env}
+
+
+      - name: Create directory and create file in homedir
+        run: |
+          ls -la ~/
+          mkdir ~/zorg
+          echo First        > ~/.zorg/home.txt
+          echo Second Line >> ~/.zorg/home.txt
+          echo Third       >> ~/.zorg/home.txt
+          ls -la ~/zorg/
+
+      - name: Show file content
+        run: |
+          ls -la ~/
+          cat ~/zorg/home.txt
+
