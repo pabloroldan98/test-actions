@@ -33,5 +33,5 @@ jobs:
           echo ${REF_NAME}
           echo ${MY_ECHO}
           NEW_VERSION=$(poetry version -s)
-          echo "S{NEW_VERSION}"
+          echo "${NEW_VERSION}"
 
