@@ -2,7 +2,7 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: release
+on: push
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -40,9 +40,3 @@ jobs:
           # to <base url>/x.y.z version subfolder
           publish_dir: ./_build
           destination_dir: ${{ env.RELEASE_VERSION }}
-      - name: Deploy redirect 🚀
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./redirect
-          keep_files: true
