@@ -8,6 +8,8 @@ packages = [{include = "test_actions"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+Sphinx = "^5.3.0"
+sphinx-rtd-dark-mode = "^1.2.4"
 
 
 [build-system]
