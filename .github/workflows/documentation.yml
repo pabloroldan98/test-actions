@@ -2,7 +2,7 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: release
+on: push
 jobs:
   docs:
     runs-on: ubuntu-latest
