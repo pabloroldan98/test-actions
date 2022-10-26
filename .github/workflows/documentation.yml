@@ -28,10 +28,10 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_dark_mode
+          poetry install
       - name: Sphinx build
         run: |
-          sphinx-build docs/source _build
+          poetry run sphinx-build docs/source _build
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
