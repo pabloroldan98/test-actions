@@ -21,27 +21,33 @@ jobs:
           cache: 'poetry'
 
 
-      - name: echos
-        env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
-          REF_NAME: ${{ github.ref_name }}
-          MY_ECHO: $(echo "heyeyeyey")
+      - name: echos release version
         run: |
-          echo ${COMMIT_MSG}
-          echo "hooooola"
-          echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
-          echo ${REF_NAME}
-          echo ${MY_ECHO}
           POETRY_VERSION=$(poetry version -s)
           echo "S{POETRY_VERSION}"
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
-      - name: echo env
+          
+
+      - name: Create file
         env:
           skip_env: ${{ env.SKIPBUMP }}
           release_env: ${{ env.RELEASE_VERSION }}
         run: |
           echo ${skip_env}
           echo ${release_env}
-          echo ${{ env.SKIPBUMP }}
-          echo ${{ env.RELEASE_VERSION }}
+
+
+      - name: Create directory and create file in homedir
+        run: |
+          ls -la ~/
+          mkdir ~/zorg
+          echo First        > ~/.zorg/home.txt
+          echo Second Line >> ~/.zorg/home.txt
+          echo Third       >> ~/.zorg/home.txt
+          ls -la ~/zorg/
+
+      - name: Show file content
+        run: |
+          ls -la ~/
+          cat ~/zorg/home.txt
 

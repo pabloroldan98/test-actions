@@ -2,7 +2,7 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: pull request
+on: release
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -21,12 +21,17 @@ jobs:
         with:
           python-version: 3.8
           cache: 'poetry'
+      - name: Save version
+        run: |
+          POETRY_VERSION=$(poetry version -s)
+          echo "RELEASE_VERSION=S{POETRY_VERSION}"
+          echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_dark_mode
+          poetry install
       - name: Sphinx build
         run: |
-          sphinx-build docs/source _build
+          poetry run sphinx-build docs/source _build
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -34,10 +39,4 @@ jobs:
           # deploy the current public folder
           # to <base url>/x.y.z version subfolder
           publish_dir: ./_build
-          destination_dir: ${{ github.ref_name }}
-      - name: Deploy redirect 🚀
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./redirect
-          keep_files: true
+          destination_dir: ${{ env.RELEASE_VERSION }}
