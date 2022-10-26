@@ -48,3 +48,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # deploy the current public folder to <base url>
           publish_dir: ./_build
+          keep_files: true
