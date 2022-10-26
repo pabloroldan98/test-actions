@@ -7,10 +7,7 @@ name: Bump version
 
 # Bump version only when closed Pull Requests to main
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  push
 
 jobs:
   bump-version:
