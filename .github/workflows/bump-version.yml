@@ -87,4 +87,4 @@ jobs:
 
     - name: Commit version change to master
       run: |
-        git push --follow-tags
+        git push --follow-tags -f
