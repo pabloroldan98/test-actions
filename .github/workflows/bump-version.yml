@@ -7,14 +7,17 @@ name: Bump version
 
 # Bump version only when closed Pull Requests to main
 on:
-  push
+  pull_request:
+    branches:
+      - main
+    types: [closed]
 
 jobs:
   bump-version:
 
     runs-on: ubuntu-latest
-#    if: "github.event.pull_request.merged == true &&
-#        !startsWith(github.head_ref, 'SKIP')"
+    if: "github.event.pull_request.merged == true &&
+        !startsWith(github.head_ref, 'SKIP')"
 
     steps:
 
@@ -39,7 +42,6 @@ jobs:
         GH_TOKEN: ${{ github.token }}
         PR_TARGET_BRANCH: ${{ github.base_ref }}
       run: |
-        echo "${GH_USER}"
         git config user.name "${GH_USER}"
         git config user.email "${GH_USER}@users.noreply.github.com"
         git remote set-url origin https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY
