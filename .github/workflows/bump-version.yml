@@ -7,17 +7,14 @@ name: Bump version
 
 # Bump version only when closed Pull Requests to main
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  push
 
 jobs:
   bump-version:
 
     runs-on: ubuntu-latest
-    if: "github.event.pull_request.merged == true &&
-        !startsWith(github.head_ref, 'SKIP')"
+#    if: "github.event.pull_request.merged == true &&
+#        !startsWith(github.head_ref, 'SKIP')"
 
     steps:
 
