@@ -5,7 +5,7 @@ name: Test
 on: push
 
 jobs:
-  test:
+  test create file:
 
     runs-on: ubuntu-latest
     if: "!startsWith(github.event.head_commit.message, 'SKIP')"
