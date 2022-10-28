@@ -1,5 +1,5 @@
 
-name: Test
+name: Test create file
 
 # Bump version only when Push
 on: push
