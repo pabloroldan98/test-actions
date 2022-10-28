@@ -50,12 +50,8 @@ jobs:
 
 
       - name: loop through commits
-        env:
-          COMMIT_ARRAY: ${{ github.event.commits }}
         run: |
-          echo "S{COMMIT_ARRAY}"
-          
-          for i in "${COMMIT_ARRAY[@]}"
+          for i in "${github.event.commits[@]}"
           do
              echo "${i}"
              echo "${i}.message"
