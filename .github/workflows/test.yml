@@ -48,3 +48,15 @@ jobs:
           echo ${{ env.SKIPBUMP }}
           echo ${{ env.RELEASE_VERSION }}
 
+
+      - name: loop through commits
+        env:
+          COMMIT_ARRAY: ${{ github.event.commits }}
+        run: |
+          echo "S{COMMIT_ARRAY}"
+          
+          for i in "${COMMIT_ARRAY[@]}"
+          do
+             echo "${i}"
+             echo "${i}.message"
+          done
