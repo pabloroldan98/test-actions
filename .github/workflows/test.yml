@@ -37,6 +37,7 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
           echo ${{ github.event.commits }}
 
+
       - name: echo env
         env:
           skip_env: ${{ env.SKIPBUMP }}
