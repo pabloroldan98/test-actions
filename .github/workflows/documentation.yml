@@ -2,7 +2,8 @@
 #         https://glebbahmutov.com/blog/versioned-doc-pages/
 
 name: Docs
-on: release
+on: [push, workflow_dispatch]
+
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -32,11 +33,19 @@ jobs:
       - name: Sphinx build
         run: |
           poetry run sphinx-build docs/source _build
-      - name: Deploy 🚀
+      - name: Deploy version 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CICD_TOKEN }}
           # deploy the current public folder
           # to <base url>/x.y.z version subfolder
           publish_dir: ./_build
-          destination_dir: ${{ env.RELEASE_VERSION }}
+          destination_dir: v3.4.6
+
+      - name: Deploy root 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.CICD_TOKEN }}
+          # deploy the current public folder to <base url>
+          publish_dir: ./_build
+          keep_files: true
