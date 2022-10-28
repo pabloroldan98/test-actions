@@ -36,7 +36,7 @@ jobs:
       - name: Deploy version 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CICD_TOKEN }}
           # deploy the current public folder
           # to <base url>/x.y.z version subfolder
           publish_dir: ./_build
@@ -45,7 +45,7 @@ jobs:
       - name: Deploy root 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CICD_TOKEN }}
           # deploy the current public folder to <base url>
           publish_dir: ./_build
           keep_files: true
